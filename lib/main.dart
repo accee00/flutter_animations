@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/example_two.dart';
 
 void main() {
   runApp(MaterialApp(home: const MyApp()));
@@ -46,24 +47,37 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _animation,
-          builder: (BuildContext context, Widget? child) {
-            return Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()..rotateY(_animation.value),
-              child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            );
-          },
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (BuildContext context, Widget? child) {
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()..rotateY(_animation.value),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ExampleTwo()),
+            ),
+            child: Text('Example two'),
+          ),
+        ],
       ),
     );
   }
